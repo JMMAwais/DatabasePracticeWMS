@@ -15,6 +15,7 @@ namespace DatabasePracticeWMS.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

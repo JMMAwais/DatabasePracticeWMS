@@ -1,0 +1,242 @@
+﻿@model DatabasePracticeWMS.DTO.EditItemDTO
+
+<h5 class="font-monospace ">Edit Item</h5>
+<hr />
+
+
+<form asp-action="EditItem" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ImageUrl">Upload Image</label>
+                <div class="" style=" width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;">
+                   @*  <img id="imagePreview" src="" alt="Image Preview" style="display:block; width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;" /> *@
+                    <img id="imagePreview" src="~/Images/@Model.ImageUrl" alt="@Model.ImageUrl" style=" width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;" /> 
+                </div>
+                <input asp-for="ImageUrl" type="file"  class="form-control" accept="image/*" onchange="previewImage(event)" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+        </div>
+        
+
+         <div class="col-md-4 pt-5">
+            <div class="form-group pt-3">
+                <label style="color:dimgrey;" asp-for="ItemNameEnglish">Item Name(English)</label>
+                <input asp-for="ItemNameEnglish" class="form-control" />
+                <span asp-validation-for="ItemNameEnglish" class="text-danger"></span>
+            </div>
+             <div class="form-group pt-3">
+                <label style="color:dimgrey;" asp-for="ItemNameArabic">Item Name(Arabic)</label>
+                <input asp-for="ItemNameArabic" class="form-control" />
+                <span asp-validation-for="ItemNameArabic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <div class="form-group pl-5 pt-5 mt-4">
+                <label style="color:dimgrey;" class="pl-5 ml-5">Expirable</label>
+                <div class=" row ml-5">
+                    <div class="form-check">
+                        <input asp-for="Expirable" type="radio" class="form-check-input" value="true" id="expirableYes" onclick="toggleExpiryDays()" />
+                        <label class="form-check-label" for="Expirable">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Expirable" type="radio" class="form-check-input" value="false" id="expirableNo" onclick="toggleExpiryDays()" checked />
+                        <label class="form-check-label" for="Expirable">No</label>
+                    </div>
+                </div>
+                <span asp-validation-for="Expirable" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row pt-4">
+        <div class=col-md-4>
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="MerchantId">Select Seller</label>
+                <select asp-for="MerchantId" class="form-control" asp-items="@(new SelectList(ViewBag.Merchant, "Id", "Name",Model.MerchantId))">
+                    <option value="">-- Select Seller --</option>
+                </select>
+                <span asp-validation-for="MerchantId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="SKU">SKU</label>
+                <input asp-for="SKU" class="form-control" />
+                <span asp-validation-for="SKU" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="Capacity">Capacity</label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class=" row pt-4">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="ThresholdPoint">Threshold Point</label>
+                <input asp-for="SKU" asp-for="ThresholdPoint" class="form-control" />
+                <span asp-validation-for="SKU" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="ExpiryDays">ExpiryDays</label>
+                <input asp-for="ExpiryDays" class="form-control" id="expiryDays" disabled />
+                <span asp-validation-for="ExpiryDays" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <h5 class="font-monospace Pt-5 pb-3">Dimensions & Weight</h5>
+    <div class="row">
+        <div class="col-md-1">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="Lenght">Length</label>
+                <input asp-for="Lenght" class="form-control" />
+                <span asp-validation-for="Lenght" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="Width">Width</label>
+                <input asp-for="Width" class="form-control" />
+                <span asp-validation-for="Width" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="Height">Height</label>
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="UnitOfDimension">Unit Of Dimension</label>
+                <select asp-for="UnitOfDimension" class="form-control">
+                    <option value="cm">cc3</option>
+                </select>
+                <span asp-validation-for="UnitOfDimension" class="text-danger"></span>
+             </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="Weight">Weight</label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color:dimgrey;" asp-for="UnitOfWeight">Unit Of Weight</label>
+                <select asp-for="UnitOfWeight" class="form-control">
+                    <option value="gm">gm</option>
+                </select>
+                 <span asp-validation-for="UnitOfDimension" class="text-danger"></span>
+             </div>
+        </div>
+    </div>
+
+    <br />
+    <h5 class="font-monospace Pt-5 Pb-4">Picking Methods</h5>
+    <div class="row">
+        <div class="col-md-6">
+            <label style="color:dimgrey;" class="pl-5 ml-5 ">Select Preffered Picking Method</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input asp-for="ISLIFO" type="radio" class="form-check-input" value="true" id="expirableYes" />
+                        <label class="form-check-label" for="ISLIFO">FIFO(First In First Out</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input asp-for="ISLIFO" type="radio" class="form-check-input" value="true" id="expirableYes" />
+                        <label class="form-check-label" for="ISLIFO">LIFO(Last In First Out</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-5">
+        <div class="col-md-4">
+            <label style="color:dimgrey;" asp-for="DescriptionEnglish">Description(English)</label>
+            <textarea asp-for="DescriptionEnglish" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="col-md-4">
+            <label style="color:dimgrey;" asp-for="DescriptionArabic">Description(Arabic)</label>
+            <textarea asp-for="DescriptionArabic" class="form-control" rows="2"></textarea>
+        </div>
+    </div>
+
+
+
+
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-1">
+            <button type="submit" class="btn btn-info text-light">Update</button>
+        </div>
+        <div class="col-1">
+            <button type="button" href="~/Inventry/Index" class="btn  btn-outline-success ">Cancel</button>
+        </div>
+    </div> 
+
+</form>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function previewImage(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block'; // Show the image
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '';
+                imagePreview.style.display = 'block'; // Hide the image if no file is selected
+            }
+        }
+
+        // function toggleExpiryDays() {
+        //     const isExpirable = document.getElementById('expirableYes').checked;
+        //     document.getElementById('expiryDays').disabled = !isExpirable;
+        // }
+
+        // // Call the toggle function on page load to set the initial state
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     toggleExpiryDays();
+        // });
+    </script>
+}

@@ -6,16 +6,16 @@
 
     </div>
     <div class="col-sm-2">
-        <a class="btn btn-info  btn-sm text-light" href="~/Inventry/AddItem">Add New +</a>
+        <a class="btn btn-info  btn-sm text-light" href="~/Inventry/InsertItem">Add New +</a>
     </div>
 </div>
-
+<form>
 <table class="table table-hover">
     <thead>
         <tr>
             <th></th>
             <th>Item</th>
-            <th>SKU</th>
+           <th>SKU</th>
             <th>Seller</th>
             <th>Inventry</th>
             <th>Capacity</th>
@@ -31,23 +31,24 @@
         {
             <tr>
                 <td>
-                    <img src="~/@item.ImageUrl" style="width:50px; height:auto;" />
+                    <img src="~/Images/@item.ImageUrl" style="width:50px; height:auto;" />
                 </td>
-                <td>@item.ItemNameEnglish</td>
+                    <td><a href="~/Inventry/ItemDetail">@item.ItemNameEnglish</a></td>
                 <td>@item.SKU</td>
                 <td>@item.Name</td>
                 <td>@item.Inventry</td>
                 <td>@item.Capacity</td>
                 <td>@item.Lenght</td>
-                <td>@item.Width</td>
+                <td>@item.Width@item.UnitOfDimension</td>
                 <td>@item.Height</td>
                 <td>@item.Expirable</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.SKU">Edit</a> |
+                    <a asp-action="EditItem"  asp-route-id="@item.SKU">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@item.SKU" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+</form>
 

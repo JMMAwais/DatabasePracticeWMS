@@ -1,0 +1,59 @@
+﻿@model DatabasePracticeWMS.Models.InsertItem
+
+<div class="row">
+    <div class="col-md-10">
+       <h5 class="font-monospace ">Item Details</h5>
+    </div>
+    <div class="col-md-2">
+        <a href="~/Inventry/Index">Back</a>
+    </div>
+</div>
+
+<form>
+    <div class="row">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="ImageUrl">Upload Image</label>
+                    <div class="" style=" width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;">
+                        @*  <img id="imagePreview" src="" alt="Image Preview" style="display:block; width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;" /> *@
+                        <img id="imagePreview" src="~/Images/@Model.ImageUrl" alt="@Model.ImageUrl" style=" width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;" />
+                    </div>
+                    <input asp-for="ImageUrl" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 pt-5">
+                <div class="form-group pt-3">
+                    <label style="color:dimgrey;" asp-for="ItemNameEnglish">Item Name(English)</label>
+                    <input asp-for="ItemNameEnglish" class="form-control" />
+                    <span asp-validation-for="ItemNameEnglish" class="text-danger"></span>
+                </div>
+                <div class="form-group pt-3">
+                    <label style="color:dimgrey;" asp-for="ItemNameArabic">Item Name(Arabic)</label>
+                    <input asp-for="ItemNameArabic" class="form-control" />
+                    <span asp-validation-for="ItemNameArabic" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <div class="form-group pl-5 pt-5 mt-4">
+                    <label style="color:dimgrey;" class="pl-5 ml-5">Expirable</label>
+                    <div class=" row ml-5">
+                        <div class="form-check">
+                            <input asp-for="Expirable" type="radio" class="form-check-input" value="true" id="expirableYes" onclick="toggleExpiryDays()" />
+                            <label class="form-check-label" for="Expirable">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="Expirable" type="radio" class="form-check-input" value="false" id="expirableNo" onclick="toggleExpiryDays()" checked />
+                            <label class="form-check-label" for="Expirable">No</label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Expirable" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

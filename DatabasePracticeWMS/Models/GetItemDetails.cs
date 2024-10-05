@@ -12,5 +12,6 @@
         public string? Width { get; set; } 
         public decimal? Height { get; set; } 
         public bool? Expirable { get; set; }
+        public string? UnitOfDimension { get; set; }
     }
 }

@@ -132,12 +132,23 @@ namespace DatabasePracticeWMS.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
+        [HttpGet]
+        [Route("Inventry/ItemDetail/{RowGuid}")]
         public async Task<IActionResult> ItemDetail(Guid RowGuid)
         {
-            return View();
+            var allItems = await _itemRepository.GetAllItemDetails(RowGuid);
+            return View(allItems);
         }
 
-            
+        
+        [Route("Inventry/ItemDelete/{SKU}")]
+        public async Task<IActionResult> ItemDelete(long SKU)
+        {
+            await _itemRepository.DeleteItemBySKU(SKU);
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

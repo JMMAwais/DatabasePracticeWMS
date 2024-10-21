@@ -10,5 +10,7 @@ namespace DatabasePracticeWMS.Repository
         Task<IEnumerable<Merchant>> GetMerchant();
         Task<IEnumerable<EditItemDTO>> GetItemBySKU(long sku);
         Task UpdateItem(InsertItemDTO model);
+        Task<AllItemDetails> GetAllItemDetails(Guid rowGuid);
+        Task DeleteItemBySKU(long sku);
     }
 }

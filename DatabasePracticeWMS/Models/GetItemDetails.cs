@@ -2,6 +2,7 @@
 {
     public class GetItemDetails
     {
+        public Guid? RowGUID { get; set; }
         public string? ImageUrl { get; set; }
         public string? ItemNameEnglish { get; set; }
         public string? SKU { get; set; }

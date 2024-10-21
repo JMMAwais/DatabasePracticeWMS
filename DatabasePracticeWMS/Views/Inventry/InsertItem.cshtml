@@ -82,7 +82,7 @@
         <div class="col-md-4">
            <div class="form-group">
                 <label style="color:dimgrey;" asp-for="ThresholdPoint">Threshold Point</label>
-                <input asp-for="SKU" asp-for="ThresholdPoint" class="form-control" />
+                <input asp-for="ThresholdPoint" class="form-control" />
             <span asp-validation-for="SKU" class="text-danger"></span>
           </div>
         </div>
@@ -161,15 +161,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-check">
-                        <input asp-for="ISLIFO" type="radio" class="form-check-input" value="true" id="expirableYes" />
-                        <label class="form-check-label" for="ISLIFO">FIFO(First In First Out</label>
+                        <input asp-for="ISLIFO" type="radio" class="form-check-input" value="false" id="ISLIFONo" name="ISLIFO" />
+                        <label class="form-check-label" for="ISLIFONo">FIFO(First In First Out</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-check">
-                        <input asp-for="ISLIFO" type="radio" class="form-check-input" value="true" id="expirableYes" />
-                        <label class="form-check-label" for="ISLIFO">LIFO(Last In First Out</label>
+                        <input asp-for="ISLIFO" type="radio" class="form-check-input" value="true" id="ISLIFOYes" name="ISLIFO" />
+                        <label class="form-check-label" for="ISLIFOYes">LIFO(Last In First Out</label>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,9 @@
             <button type="button" href="~/Inventry/Index" class="btn  btn-outline-success ">Cancel</button>
         </div>
     </div>
-    
+    <br />
+    <br />
+    <br />
 </form>
 
 

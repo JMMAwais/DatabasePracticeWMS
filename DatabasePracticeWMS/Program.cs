@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IItemRepository, ItemRepository>();
+builder.Services.AddTransient<IWarehouseRepository, WarehouseRepository>();
+builder.Services.AddTransient<IStorageRepository, StorageRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

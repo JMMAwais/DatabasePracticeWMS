@@ -4,7 +4,7 @@ namespace DatabasePracticeWMS.DTO
 {
     public class InsertItemDTO
     {
-        public long Id { get; set; }
+      //  public long Id { get; set; }
         public string? ImageUrl { get; set; }
         public string? ItemNameEnglish { get; set; }
         public string? ItemNameArabic { get; set; }
@@ -20,9 +20,9 @@ namespace DatabasePracticeWMS.DTO
         public decimal? Weight { get; set; }
         public string? UnitOfDimension { get; set; }
         public string? UnitOfWeight { get; set; }
-        public byte? ISLIFO { get; set; }
+        public bool? ISLIFO { get; set; }
         public string? DescriptionEnglish { get; set; }
         public string? DescriptionArabic { get; set; }
-        public DateTime? CreatedDate { get; set; }
+      //  public DateTime? CreatedDate { get; set; }
     }
 }

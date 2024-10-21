@@ -1,0 +1,122 @@
+﻿@model IEnumerable<DatabasePracticeWMS.Models.Warehouse.GetWarehouseDetail>
+
+@Html.Partial("_WarehouseAddView", new DatabasePracticeWMS.Models.Warehouse.AddWarehouse())
+@Html.Partial("_EditWarehouse", new DatabasePracticeWMS.Models.Warehouse.AddWarehouse())
+
+<h3>Warehouse</h3>
+<div class="row mt-4">
+    <div class="col-sm-10">
+      
+    </div>
+    <div class="col-sm-2">
+        <a id="openModalBtn" class="btn btn-info  btn-sm text-light">Add New +</a>
+        @* <button id="openModalBtn" class="btn btn-primary">Open Modal</button> *@
+    </div>
+</div>
+<form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                     <td></td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.CityName</td>
+                    <td>
+                       @*  <a id="openModalBtnEdit" class="btn btn-success btn-sm" >Edit</a> *@
+                        <a id="openModalBtnEdit" class="btn btn-success btn-sm" data-id="@item.RowGuid" data-name="@item.Name" data-city="@item.CityId">Edit</a>|
+                        <a asp-action="DeleteWarehouse" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+
+
+        $('#openModalBtnEdit').click(function () {
+            $('#myForm1')[0].reset(); // Resets the add form
+            $('#addWarehouseModalEdit').modal('show');
+        });
+
+
+        // Open modal on button click
+        $('#openModalBtn').click(function () {
+            $('#myForm')[0].reset();
+            $('#addWarehouseModal').modal('show');
+        });
+
+        // Handle form submission
+        $('#submitBtn').click(function () {
+            $('#myForm').submit();
+        });
+
+        $('#closeButton').on('click', function () {
+            $('#addWarehouseModal').modal('hide');
+        });
+
+        $('#myModal').on('hidden.bs.modal', function () {
+            // Reset the form when modal is closed
+            $('#myForm')[0].reset();
+        });
+
+
+
+       
+
+
+
+
+
+    });
+
+    $(document).ready(function () {
+        $('#openModalBtnEdit').click(function () {
+            $('#addWarehouseModalEdit').modal('show');
+        });
+
+
+
+        // Open modal for editing warehouse
+        $(document).on('click', '#openModalBtnEdit', function () {
+            var warehouseId = $(this).data('id');
+            var warehouseName = $(this).data('name');
+            var cityId = $(this).data('city');
+
+            // Populate the modal fields with data
+            $('#myForm1 input[name="Name"]').val(warehouseName);
+            $('#myForm1 select[name="CityId"]').val(cityId);
+
+            // Set the form action to edit the warehouse (if needed)
+            $('#myForm1').attr('action', '/Warehouse/Edit/' + warehouseId);
+
+            $('#addWarehouseModalEdit').modal('show');
+
+            // Handle form submission
+            $('#submitBtn1').click(function () {
+                $('#myForm1').submit();
+            });
+        });
+
+    });
+       
+
+</script>
+ 
+
+

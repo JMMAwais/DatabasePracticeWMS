@@ -1,6 +1,6 @@
-﻿@model DatabasePracticeWMS.Models.InsertItem
+﻿@model DatabasePracticeWMS.Models.AllItemDetails
 
-<div class="row">
+<div class="row pt-1">
     <div class="col-md-10">
        <h5 class="font-monospace ">Item Details</h5>
     </div>
@@ -10,50 +10,169 @@
 </div>
 
 <form>
-    <div class="row">
-        <div class="row">
-            <div class="col-md-4">
+    
+        <div class="row pt-4">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label asp-for="ImageUrl">Upload Image</label>
                     <div class="" style=" width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;">
                         @*  <img id="imagePreview" src="" alt="Image Preview" style="display:block; width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;" /> *@
                         <img id="imagePreview" src="~/Images/@Model.ImageUrl" alt="@Model.ImageUrl" style=" width: 130px; height: 130px; margin-bottom: 10px; border:1px dashed;" />
                     </div>
-                    <input asp-for="ImageUrl" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
-                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div>
             </div>
 
 
-            <div class="col-md-4 pt-5">
+            <div class="col-md-2 pt-2">
                 <div class="form-group pt-3">
-                    <label style="color:dimgrey;" asp-for="ItemNameEnglish">Item Name(English)</label>
-                    <input asp-for="ItemNameEnglish" class="form-control" />
-                    <span asp-validation-for="ItemNameEnglish" class="text-danger"></span>
+                    <label style="color:dimgrey;" asp-for="SKU"><h6>ID-@Model.SKU</h6></label>  
                 </div>
                 <div class="form-group pt-3">
-                    <label style="color:dimgrey;" asp-for="ItemNameArabic">Item Name(Arabic)</label>
-                    <input asp-for="ItemNameArabic" class="form-control" />
-                    <span asp-validation-for="ItemNameArabic" class="text-danger"></span>
+                    <label style="color:dimgrey;" asp-for="ItemNameEnglish"><h6>@Model.ItemNameEnglish</h6></label> 
                 </div>
             </div>
-            <div class="col-md-1"></div>
+     
             <div class="col-md-3">
-                <div class="form-group pl-5 pt-5 mt-4">
-                    <label style="color:dimgrey;" class="pl-5 ml-5">Expirable</label>
-                    <div class=" row ml-5">
-                        <div class="form-check">
-                            <input asp-for="Expirable" type="radio" class="form-check-input" value="true" id="expirableYes" onclick="toggleExpiryDays()" />
-                            <label class="form-check-label" for="Expirable">Yes</label>
-                        </div>
-                        <div class="form-check">
-                            <input asp-for="Expirable" type="radio" class="form-check-input" value="false" id="expirableNo" onclick="toggleExpiryDays()" checked />
-                            <label class="form-check-label" for="Expirable">No</label>
-                        </div>
-                    </div>
-                    <span asp-validation-for="Expirable" class="text-danger"></span>
+               <div class="form-group pt-1">
+                    <label style="color:dimgrey;" asp-for="Name">Seller Name : </label> <span style="margin-left: 12px;">@Model.Name</span>
+               </div>
+               <div class="form-group pt-2">
+                    <label style="color:dimgrey;" asp-for="Name">SKU : </label> <span style="margin-left: 65px;">@Model.SKU</span>
+               </div>
+               <div class="form-group pt-2">
+                    <label style="color:dimgrey;" asp-for="Expirable">Expirable : </label> <span style="margin-left: 30px;">@(Model.Expirable ? "Yes" : "No")</span>
+               </div>
+               <div class="form-group pt-2">
+                   <label style="color:dimgrey;" asp-for="ExpiryDays">Expiry Days : </label> <span style="margin-left: 12px;">@Model.ExpiryDays</span>
+               </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group pt-1">
+                <label style="color:dimgrey;" asp-for="InhandQuantity">In-hand Quantity : </label> <span style="margin-left: 12px;">@Model.InhandQuantity</span>
                 </div>
+            <div class="form-group pt-2">
+                <label style="color:dimgrey;" asp-for="DamageQuantity">Damage Quantity : </label> <span style="margin-left: 12px;">@Model.DamageQuantity</span>
+            </div>
+            <div class="form-group pt-2">
+                <label style="color:dimgrey;" asp-for="ThresholdPoint">Threshold Point : </label> <span style="margin-left: 20px;">@Model.ThresholdPoint</span>
+            </div>
             </div>
         </div>
+
+        <h5 class="pt-4">Dimension & Weight</h5>
+      @*   <div class=" row pt-2 "> *@
+            <div class="row    ml-5" style="background-color:darkcyan; border-top-left-radius:5px; border-top-right-radius:5px;">
+                <div class="col-md-2 mt-2 mb-1">
+                    <h6 class="text-light text-center">Lenght</h6>
+                </div>
+            <div class="col-md-2 mt-2 mb-1">
+                <h6 class="text-light text-center">Width</h6>
+            </div>
+            <div class="col-md-2 mt-2 mb-1">
+                <h6 class="text-light text-center">Height</h6>
+            </div>
+            <div class="col-md-2 mt-2 mb-1">
+                <h6 class="text-light text-center">Unit of Dimension</h6>
+            </div>
+            <div class="col-md-2 mt-2 mb-1 pl-5">
+                <h6 class="text-light text-center">Weight</h6>
+            </div>
+            <div class="col-md-2 mt-2 mb-1">
+                <h6 class="text-light text-center">Unit of Weight</h6>
+            </div>
+            </div>
+        @* </div> *@
+        <div class="row">
+        <div class="col-md-2   border border-top-0">
+            <p class="text-black text-center">@Model.Lenght</p>
+        </div>
+        <div class="col-md-2   border border-top-0">
+            <p class="text-black text-center">@Model.Width</p>
+        </div>
+        <div class="col-md-2   border border-top-0">
+            <p class="text-black text-center">@Model.Height</p>
+        </div>
+        <div class="col-md-2   border border-top-0">
+            <p class="text-black text-center">@Model.UnitOfDimension</p>
+        </div>
+        <div class="col-md-2   border border-top-0">
+            <p class="text-black text-center">@Model.Weight</p>
+        </div>
+        <div class="col-md-2   border border-top-0">
+            <p class="text-black text-center">@Model.UnitOfWeight</p>
+        </div>
+            </div>
+        
+            <div class="row">
+        <div class="col-md-2 pt-2">
+            
+            <div class="form-group pt-3">
+                <label style="color:dimgrey;" asp-for="ItemNameEnglish">ItemNameEnglish:</label>
+            </div>
+            <div class="form-group pt-3">
+                <label style="color:dimgrey;" asp-for="ItemNameArabic">ItemNameArabic:</label>
+            </div>
+        </div>
+
+        <div class="col-md-2 pt-2">
+
+            <div class="form-group pt-3">
+                <label  asp-for="ItemNameEnglish">@Model.ItemNameEnglish</label>
+            </div>
+            <div class="form-group pt-3">
+                <label  asp-for="ItemNameArabic">@Model.ItemNameArabic</label>
+            </div>
+        </div>
+            </div>
+
+    <h5 class="pt-5">Picking Method</h5>
+        <div class="row">
+            <div class="col-md-3">
+               <div class="form-group pt-3">
+                  <label style="color:dimgrey;" asp-for="ISLIFO">Preffered Picking Method</label>
+               </div>
+            </div>
+        <div class="col-md-3">
+            <div class="form-group pt-3 ">
+                <label asp-for="ISLIFO">@(Model.ISLIFO ? "LIFO (Last In First Out)" : "FIFO (First In First Out)")</label>
+            </div>
+        </div>
+        </div>
+
+        <h5 class="pt-5">Batch Details</h5>
+
+        <div class="row    ml-5" style="background-color:darkcyan; border-top-left-radius:5px; border-top-right-radius:5px;">
+           <div class="col-md-3 mt-2 mb-1">
+               <h6 class="text-light text-center">Batch Number</h6>
+           </div>
+        <div class="col-md-3 mt-2 mb-1">
+            <h6 class="text-light text-center">Items Quantity</h6>
+        </div>
+        <div class="col-md-3 mt-2 mb-1">
+            <h6 class="text-light text-center">Expiry Date</h6>
+        </div>
+        <div class="col-md-3 mt-2 mb-1">
+            <h6 class="text-light text-center">Stock Location</h6>
+        </div>
+        
+        
     </div>
+     <div class="row">
+        <div class="col-md-3   border border-top-0">
+            <p class="text-black text-center">undefined</p>
+        </div>
+        <div class="col-md-3   border border-top-0">
+            <p class="text-black text-center">undefined</p>
+        </div>
+        <div class="col-md-3   border border-top-0">
+            <p class="text-black text-center">undefined</p>
+        </div>
+        <div class="col-md-3   border border-top-0">
+            <p class="text-black text-center">undefined</p>
+        </div>
+       
+    </div>
+    <br />
+    <br />
+    <br />
 </form>

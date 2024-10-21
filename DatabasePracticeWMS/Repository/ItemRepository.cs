@@ -15,7 +15,6 @@ namespace DatabasePracticeWMS.Repository
         public ItemRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-
         }
         public async Task<IEnumerable<GetItemDetails>> GetItemDetails()
         {
@@ -68,15 +67,26 @@ namespace DatabasePracticeWMS.Repository
             commandType: CommandType.StoredProcedure).ConfigureAwait(false);
         }
 
-        //public async Task<IEnumerable<EditItemDTO>> GetAllItemDetails(Guid rowGuid)
-        //{
-        //    var connection = _configuration.GetConnectionString("DefaultConnection");
-        //    SqlConnection sqlConnection = new SqlConnection(connection);
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("@SKU", sku);
-        //    var items = await sqlConnection.QueryAsync<EditItemDTO>("spGetItemBySKU", parameters,
-        //    commandType: CommandType.StoredProcedure).ConfigureAwait(false);
-        //    return items;
-        //}
+        public async Task<AllItemDetails> GetAllItemDetails(Guid rowGuid)
+        {
+            var connection = _configuration.GetConnectionString("DefaultConnection");
+            SqlConnection sqlConnection = new SqlConnection(connection);
+            var parameters = new DynamicParameters();
+            parameters.Add("@RowGuid", rowGuid);
+            var items = await sqlConnection.QueryAsync<AllItemDetails>("spGetAllDetails", parameters,
+            commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+            return items.FirstOrDefault();
+        }
+
+        public async Task DeleteItemBySKU(long sku)
+        {
+            var connection = _configuration.GetConnectionString("DefaultConnection");
+            SqlConnection sqlConnection = new SqlConnection(connection);
+            var parameters = new DynamicParameters();
+            parameters.Add("@SKU", sku);
+            var items = await sqlConnection.QueryAsync("spDeleteItem", parameters,
+            commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+
+        }
     }
 }

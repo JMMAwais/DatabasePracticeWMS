@@ -42,7 +42,7 @@ namespace DatabasePracticeWMS.Models
 
         [Required(ErrorMessage = "This Field is required!")]
         public string? UnitOfWeight { get; set; }
-        public byte? ISLIFO { get; set; }
+        public bool? ISLIFO { get; set; }
 
         [Required(ErrorMessage = "This Field is required!")]
         public string? DescriptionEnglish { get; set; }

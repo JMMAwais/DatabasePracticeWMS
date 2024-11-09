@@ -6,7 +6,7 @@ using Dapper;
 
 namespace DatabasePracticeWMS.Repository
 {
-    public class StorageRepository:IStorageRepository
+    public class StorageRepository : IStorageRepository
     {
         private readonly IConfiguration _configuration;
 
@@ -23,5 +23,18 @@ namespace DatabasePracticeWMS.Repository
             commandType: CommandType.StoredProcedure).ConfigureAwait(false);
             return storage;
         }
+
+        public async Task<IEnumerable<StockLocation>> GetStockLocations( int Id)
+        {
+            var connection = _configuration.GetConnectionString("DefaultConnection");
+            SqlConnection sqlConnection = new SqlConnection(connection);
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", Id, DbType.Int32);
+            var stock = await sqlConnection.QueryAsync<StockLocation>("spGetStorageLocation",
+            parameters,commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+            return stock;
+        }
+
+
     }
 }

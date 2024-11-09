@@ -1,0 +1,69 @@
+﻿@model DatabasePracticeWMS.Models.Storage.StockLocationVM
+
+<div style="border:solid 1px lightgray; border-radius:5px; height:130px">
+    <div style="margin-left:15px; margin-top:40px;" >
+        <h5 style="padding-left:5px; color:cadetblue;">@Model.StorageDetails.Name</h5>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        <p style="margin-left:20px; margin-top:10px;">Type:  <span style="margin-left:8px;">@Model.StorageDetails.Type</span> </p>
+        </div>
+        <div class="col-md-3">
+            <p style="margin-left:20px; margin-top:10px;">Warehouse: <span style="margin-left:5px;">@Model.StorageDetails.WarehouseName</span> </p>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)" />
+            </th>
+            <th>S.no</th>
+            <th>ID</th>
+            <th>Pre-Fix (Name)</th>
+            <th>Seller</th>
+            <th>Occupied Space</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            long incrementedId = 0;
+        }
+        @foreach (var item in Model.StockLocations)
+        {
+
+            if (item.Id != null && item.Id != 0 && item.Id <= 1)
+            {
+                incrementedId = 1;
+            }
+
+            <tr>
+                <td>
+                    <input type="checkbox" class="row-checkbox" value="@item.Id" />
+                </td>
+                <td>@incrementedId</td>
+                <td>@item.StorageLocationId</td>
+                <td>@item.Prefix</td>
+                <td>@item.MerchantId</td>
+                <td>@item.OccupiedSpace</td>
+            </tr>
+            incrementedId++;
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function toggleAllCheckboxes(source) {
+            var checkboxes = document.querySelectorAll('.row-checkbox');
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = source.checked;
+            });
+        }
+    </script>
+}

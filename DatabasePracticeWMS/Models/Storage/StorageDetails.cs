@@ -9,6 +9,7 @@ namespace DatabasePracticeWMS.Models.Storage
         public string? Name { get; set; }
         public string? Type { get; set; }
         public long? WarhouseId { get; set; }
+        public string? WarehouseName { get; set; }
         public string? Volume { get; set; }
         public decimal? Weight { get; set; }
         public string? NameArabic { get; set; }

@@ -1,5 +1,7 @@
 ﻿using DatabasePracticeWMS.DTO;
+using DatabasePracticeWMS.Filters;
 using DatabasePracticeWMS.Models;
+using DatabasePracticeWMS.Models.Storage;
 
 namespace DatabasePracticeWMS.Repository
 {
@@ -12,5 +14,6 @@ namespace DatabasePracticeWMS.Repository
         Task UpdateItem(InsertItemDTO model);
         Task<AllItemDetails> GetAllItemDetails(Guid rowGuid);
         Task DeleteItemBySKU(long sku);
+        Task<IEnumerable<StockLocationFormula>> GetItemByMechantId(long Id);
     }
 }

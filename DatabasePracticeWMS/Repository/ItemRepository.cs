@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using DatabasePracticeWMS.DTO;
+using DatabasePracticeWMS.Models.Storage;
+using DatabasePracticeWMS.Filters;
 
 namespace DatabasePracticeWMS.Repository
 {
@@ -24,6 +26,19 @@ namespace DatabasePracticeWMS.Repository
             commandType: CommandType.StoredProcedure).ConfigureAwait(false);
             return items;
         }
+
+
+        //public async Task<IEnumerable<GetItemDetails>> GetItemDetails(FilterParams filter)
+        //{
+        //    var connection = _configuration.GetConnectionString("DefaultConnection");
+        //    SqlConnection sqlConnection = new SqlConnection(connection);
+        //    var filterJSON = JsonSerializer.Serialize(filter);
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("@RequestJson", filterJSON, DbType.String);
+        //    var items = await sqlConnection.QueryAsync<GetItemDetails>("spGetItemDetails", parameters,
+        //    commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        //    return items;
+        //}
 
         public async Task InsertItem(InsertItemDTO item)
         {
@@ -52,6 +67,17 @@ namespace DatabasePracticeWMS.Repository
             var parameters = new DynamicParameters();
             parameters.Add("@SKU", sku);
             var items = await sqlConnection.QueryAsync<EditItemDTO>("spGetItemBySKU", parameters,
+            commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+            return items;
+        }
+
+        public async Task<IEnumerable<StockLocationFormula>> GetItemByMechantId(long Id)
+        {
+            var connection = _configuration.GetConnectionString("DefaultConnection");
+            SqlConnection sqlConnection = new SqlConnection(connection);
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", Id);
+            var items = await sqlConnection.QueryAsync<StockLocationFormula>("spGetItemByMerchantId", parameters,
             commandType: CommandType.StoredProcedure).ConfigureAwait(false);
             return items;
         }
